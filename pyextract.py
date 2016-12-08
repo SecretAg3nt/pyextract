@@ -31,12 +31,14 @@ def biotek(reader, f):
     f.write('')
     f.close()
 
-
-with open(sys.argv[2], 'w') as f:
-    with open(sys.argv[1], 'r') as csvfile:
-        reader = csv.reader(csvfile, delimiter='\t')
-        row1 = next(reader)
-        if row1[0][0] == 'P':
-            multiscan(reader, f)
-        else:
-            biotek(reader, f)
+if len(sys.argv) != 3:
+    print("Usage: python pyextract.py <inputfile> <outputfile>")
+else:
+    with open(sys.argv[2], 'w') as f:
+        with open(sys.argv[1], 'r') as csvfile:
+            reader = csv.reader(csvfile, delimiter='\t')
+            row1 = next(reader)
+            if row1[0][0] == 'P':
+                multiscan(reader, f)
+            else:
+                biotek(reader, f)
