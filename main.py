@@ -1,8 +1,22 @@
 import csv
+import sys
 
 
 def multiscan(reader, f):
-    return
+    next(reader)
+    next(reader)
+    for row in reader:
+        if row != [] and row[0] != '':
+            if row[0][0] == ' ' or row[0][0] == 'R':
+                f.write('\n')
+                f.write('\n')
+            elif row[0][0] == 'K':
+                break
+            elif len(row[1:-1]) > 2:
+                f.write("+" + "\t+".join(row[1:]) + '\n')
+    f.write('\n')
+    f.write('\n')
+    f.close()
 
 
 def biotek(reader, f):
@@ -18,8 +32,8 @@ def biotek(reader, f):
     f.close()
 
 
-with open('testoutput.TXT', 'w') as f:
-    with open('datafiles/btinput.txt', 'r') as csvfile:
+with open(sys.argv[2], 'w') as f:
+    with open(sys.argv[1], 'r') as csvfile:
         reader = csv.reader(csvfile, delimiter='\t')
         row1 = next(reader)
         if row1[0][0] == 'P':
