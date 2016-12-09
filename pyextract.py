@@ -1,5 +1,6 @@
 import csv
 import sys
+import os
 from Tkinter import *
 import tkFileDialog
 
@@ -32,6 +33,12 @@ def biotek(reader, f):
     f.write('')
     f.close()
 
+def finishedpopup():
+        toplevel = Toplevel()
+        toplevel.geometry("300x100")
+        label1 = Label(toplevel, text='Conversion Finished!').pack()
+        toplevel.focus_force()
+
 class Window(Frame):
 
     def __init__(self, master=None):
@@ -54,8 +61,15 @@ class Window(Frame):
         self.savefiletext.place(x=0, y= 60)
 
         self.file_opt = options = {}
-        options['filetypes'] = [('All Files', '.*')]
+        options['filetypes'] = [('BioTek/Multiscan Files', '*.txt;*.exp')]
         options['title'] = 'Import File'
+        options['initialdir'] = os.getcwd()
+
+        self.savefile_opt = options = {}
+        options['defaultextension'] = '.txt'
+        options['filetypes'] = [('Text Files', '*.txt')]
+        options['title'] = 'Export File'
+        options['initialdir'] = os.getcwd()
 
     def askopenfilename(self):
         self.filename=tkFileDialog.askopenfilename(**self.file_opt)
@@ -64,7 +78,7 @@ class Window(Frame):
         self.filetext.insert(END, self.filename)
 
     def asksaveasfilename(self):
-        self.savefilename = tkFileDialog.asksaveasfilename(**self.file_opt)
+        self.savefilename = tkFileDialog.asksaveasfilename(**self.savefile_opt)
         if len(self.savefiletext.get()) !=0:
             self.savefiletext.delete("0", END)
         self.savefiletext.insert(END, self.savefilename)
@@ -77,9 +91,11 @@ class Window(Frame):
                     row1 = next(reader)
                     if row1[0][0] == 'P':
                         multiscan(reader, f)
+                        finishedpopup()
                     else:
                         biotek(reader, f)
-            exit()
+                        finishedpopup()
+
 
 gui = Tk()
 gui.geometry("400x150")
@@ -87,14 +103,4 @@ gui.resizable(width=False, height=False)
 app = Window(gui)
 gui.mainloop()
 
-#if len(sys.argv) != 3:
-#    print("Usage: python pyextract.py <inputfile> <outputfile>")
-#else:
-#    with open(sys.argv[2], 'w') as f:
-#        with open(sys.argv[1], 'r') as csvfile:
-#            reader = csv.reader(csvfile, delimiter='\t')
-#            row1 = next(reader)
-#            if row1[0][0] == 'P':
-#                multiscan(reader, f)
-#            else:
-#                biotek(reader, f)
+
