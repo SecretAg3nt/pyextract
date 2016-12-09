@@ -48,6 +48,10 @@ class Window(Frame):
         filesaveasButton.place(x=300, y=60)
         convertButton = Button(self, text="Convert", command=self.convert)
         convertButton.place(x=300, y=110)
+        self.filetext = Entry(self, width=35)
+        self.filetext.place(x=0, y=10)
+        self.savefiletext = Entry(self, width=35)
+        self.savefiletext.place(x=0, y= 60)
 
         self.file_opt = options = {}
         options['filetypes'] = [('All Files', '.*')]
@@ -55,11 +59,15 @@ class Window(Frame):
 
     def askopenfilename(self):
         self.filename=tkFileDialog.askopenfilename(**self.file_opt)
-        print(self.filename)
+        if len(self.filetext.get()) != 0:
+            self.filetext.delete("0", END)
+        self.filetext.insert(END, self.filename)
 
     def asksaveasfilename(self):
         self.savefilename = tkFileDialog.asksaveasfilename(**self.file_opt)
-        print(self.savefilename)
+        if len(self.savefiletext.get()) !=0:
+            self.savefiletext.delete("0", END)
+        self.savefiletext.insert(END, self.savefilename)
 
     def convert(self):
         if self.filename and self.savefilename:
@@ -74,6 +82,7 @@ class Window(Frame):
 
 gui = Tk()
 gui.geometry("400x150")
+gui.resizable(width=False, height=False)
 app = Window(gui)
 gui.mainloop()
 
