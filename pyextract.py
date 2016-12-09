@@ -54,16 +54,23 @@ class Window(Frame):
         options['title'] = 'Import File'
 
     def askopenfilename(self):
-        filename=tkFileDialog.askopenfilename(**self.file_opt)
-        print(filename)
+        self.filename=tkFileDialog.askopenfilename(**self.file_opt)
+        print(self.filename)
 
     def asksaveasfilename(self):
-        savefilename = tkFileDialog.asksaveasfilename(**self.file_opt)
-        print(savefilename)
+        self.savefilename = tkFileDialog.asksaveasfilename(**self.file_opt)
+        print(self.savefilename)
 
     def convert(self):
-        return
-
+        if self.filename and self.savefilename:
+            with open(self.savefilename, 'w') as f:
+                with open(self.filename, 'r') as csvfile:
+                    reader = csv.reader(csvfile, delimiter='\t')
+                    row1 = next(reader)
+                    if row1[0][0] == 'P':
+                        multiscan(reader, f)
+                    else:
+                        biotek(reader, f)
 
 gui = Tk()
 gui.geometry("400x150")
