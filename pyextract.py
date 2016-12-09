@@ -79,6 +79,7 @@ class Window(Frame):
                         multiscan(reader, f)
                     else:
                         biotek(reader, f)
+            exit()
 
 gui = Tk()
 gui.geometry("400x150")
