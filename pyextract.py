@@ -74,16 +74,14 @@ class Window(Frame):
         options['initialdir'] = os.getcwd()
 
     def askopenfilename(self):
-        self.filename = tkFileDialog.askopenfilename(**self.file_opt)
         if len(self.filetext.get()) != 0:
             self.filetext.delete("0", END)
-        self.filetext.insert(END, self.filename)
+        self.filetext.insert(END, tkFileDialog.askopenfilename(**self.file_opt))
 
     def asksaveasfilename(self):
-        self.savefilename = tkFileDialog.asksaveasfilename(**self.savefile_opt)
         if len(self.savefiletext.get()) != 0:
             self.savefiletext.delete("0", END)
-        self.savefiletext.insert(END, self.savefilename)
+        self.savefiletext.insert(END, tkFileDialog.asksaveasfilename(**self.savefile_opt))
 
     def convert(self):
         self.filename = self.filetext.get()
