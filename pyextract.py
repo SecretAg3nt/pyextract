@@ -1,8 +1,8 @@
 import csv
-import sys
 import os
 from Tkinter import *
 import tkFileDialog
+
 
 def multiscan(reader, f):
     next(reader)
@@ -33,11 +33,13 @@ def biotek(reader, f):
     f.write('')
     f.close()
 
+
 def finishedpopup():
         toplevel = Toplevel()
         toplevel.geometry("300x100")
         label1 = Label(toplevel, text='Conversion Finished!').pack()
         toplevel.focus_force()
+
 
 class Window(Frame):
 
@@ -58,7 +60,7 @@ class Window(Frame):
         self.filetext = Entry(self, width=35)
         self.filetext.place(x=0, y=10)
         self.savefiletext = Entry(self, width=35)
-        self.savefiletext.place(x=0, y= 60)
+        self.savefiletext.place(x=0, y=60)
 
         self.file_opt = options = {}
         options['filetypes'] = [('BioTek/Multiscan Files', '*.txt;*.exp')]
@@ -72,14 +74,14 @@ class Window(Frame):
         options['initialdir'] = os.getcwd()
 
     def askopenfilename(self):
-        self.filename=tkFileDialog.askopenfilename(**self.file_opt)
+        self.filename = tkFileDialog.askopenfilename(**self.file_opt)
         if len(self.filetext.get()) != 0:
             self.filetext.delete("0", END)
         self.filetext.insert(END, self.filename)
 
     def asksaveasfilename(self):
         self.savefilename = tkFileDialog.asksaveasfilename(**self.savefile_opt)
-        if len(self.savefiletext.get()) !=0:
+        if len(self.savefiletext.get()) != 0:
             self.savefiletext.delete("0", END)
         self.savefiletext.insert(END, self.savefilename)
 
