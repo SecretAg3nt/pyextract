@@ -63,7 +63,7 @@ class Window(Frame):
         self.savefiletext.place(x=0, y=60)
 
         self.file_opt = options = {}
-        options['filetypes'] = [('BioTek/Multiscan Files', '*.txt;*.exp')]
+        options['filetypes'] = [('BioTek/Multiscan Files', '*.txt;*.exp'), ('All files', '*.*')]
         options['title'] = 'Import File'
         options['initialdir'] = os.getcwd()
 
@@ -86,6 +86,8 @@ class Window(Frame):
         self.savefiletext.insert(END, self.savefilename)
 
     def convert(self):
+        self.filename = self.filetext.get()
+        self.savefilename = self.savefiletext.get()
         if self.filename and self.savefilename:
             with open(self.savefilename, 'w') as f:
                 with open(self.filename, 'r') as csvfile:
