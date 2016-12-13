@@ -40,7 +40,7 @@ def biotek(reader, f):
 def finishedpopup():
         toplevel = Toplevel()
         toplevel.geometry('300x100')
-        label1 = Label(toplevel, text='Conversion Finished!').pack()
+        Label(toplevel, text='Conversion Finished!').pack()
         toplevel.focus_force()
 
 
