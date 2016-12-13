@@ -1,7 +1,7 @@
 import csv
 import os
-from Tkinter import *
 import tkFileDialog
+from Tkinter import *
 
 
 # Converts multiscan format to MPA readable
