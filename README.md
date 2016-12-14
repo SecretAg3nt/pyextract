@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0ef17496ef90473db6e311ad693c56b1)](https://www.codacy.com/app/liamhawkins/pyextract?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=liamhawkins/pyextract&amp;utm_campaign=Badge_Grade)
 # pyextract
 Converts output from Multiscan and BioTek spectrometers to MPA readable files
 ## Instructions
