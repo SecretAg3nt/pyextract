@@ -38,10 +38,10 @@ def biotek(reader, f):
 
 # Pop up window indicates when file has successfully converted
 def finishedpopup():
-        toplevel = Toplevel()
-        toplevel.geometry('300x100')
-        Label(toplevel, text='Conversion Finished!').pack()
-        toplevel.focus_force()
+    toplevel = Toplevel()
+    toplevel.geometry('300x100')
+    Label(toplevel, text='Conversion Finished!').pack()
+    toplevel.focus_force()
 
 
 class Window(Frame):
@@ -54,10 +54,12 @@ class Window(Frame):
         self.master.title('pyextract')
         self.pack(fill=BOTH, expand=1)
 
-        fileopenButton = Button(self, text='Import File', command=self.askopenfilename)
+        fileopenButton = Button(
+            self, text='Import File', command=self.askopenfilename)
         fileopenButton.place(x=300, y=10)
 
-        filesaveasButton = Button(self, text='Export File', command=self.asksaveasfilename)
+        filesaveasButton = Button(
+            self, text='Export File', command=self.asksaveasfilename)
         filesaveasButton.place(x=300, y=60)
 
         convertButton = Button(self, text='Convert', command=self.convert)
@@ -87,13 +89,15 @@ class Window(Frame):
     def askopenfilename(self):
         if len(self.filetext.get()) != 0:
             self.filetext.delete('0', END)
-        self.filetext.insert(END, tkFileDialog.askopenfilename(**self.file_opt))
+        self.filetext.insert(END, tkFileDialog.askopenfilename(**
+                                                               self.file_opt))
 
     # Export file, deletes text in text box and replaces with selected file
     def asksaveasfilename(self):
         if len(self.savefiletext.get()) != 0:
             self.savefiletext.delete('0', END)
-        self.savefiletext.insert(END, tkFileDialog.asksaveasfilename(**self.savefile_opt))
+        self.savefiletext.insert(
+            END, tkFileDialog.asksaveasfilename(**self.savefile_opt))
 
     # Checks for filenames in textboxes, then proceedes with conversion
     def convert(self):
@@ -110,6 +114,7 @@ class Window(Frame):
                     else:
                         biotek(reader, f)
                         finishedpopup()
+
 
 if __name__ == '__main__':
     gui = Tk()
